@@ -24,11 +24,22 @@
 쿠폰 상태가 사용가능한 상태이다.
 
 ## 요구사항
-* spring boot로 구현해주세요. (java 와 kotlin 둘다 사용 가능하며, kotlin 사용시 가산점) 
+* spring boot로 구현해주세요.  
 * README.md 파일에 프로젝트 소개 및 문제해결 전략, 프로젝트 빌드와 실행 방법을 명시해주세요. 
 * Database를 사용하고 Schema를 산출물에 포함해주세요. 
 * Unit Test 코드를 작성해주세요. 
 * 요구사항에 명시되지 않은 부분은 자유롭게 구현해도 좋습니다.
+
+## API스펙
+### 쿠폰 목록 조회 API 
+### /coupon/availableCouponList/{amount}
+
+
+
+### 쿠폰 사용 처리 API
+### /coupon/couponPayment/{id}/{amount}
+
+
 
 ## 문제해결
 
