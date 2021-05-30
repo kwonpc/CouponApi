@@ -33,25 +33,54 @@
 ## API스펙
 ### 쿠폰 목록 조회 API 
 ### /coupon/availableCouponList/{amount}
-#### 요청 
-| amount |  상품 금액   |
-#### 응답 ( http 200 OK, http 400 Bad Request, mediaType = application/json)
-| resultMsg |  응답메시지   |
-| couponList |  쿠폰리스트   |
+|구분|파라미터|설명|
+|---|---|---|
+|요청|amount|상품금액|
+|---|---|---|
+|HTTP응답코드|200|정상|
+|HTTP응답코드|400|비정상|
+|---|---|---|
+|응답(json)|resultMsg|응답메시지|
+|응답(json)|couponList|쿠폰리스트|
+|응답(json)|- id|쿠폰id|
+|응답(json)|- useMinAmount|최소 사용 가능 상품 금액|
+|응답(json)|- discountAmount|할인 금액|
+|응답(json)|- usableFrom|쿠폰 사용 가능일시|
+|응답(json)|- usableUntil|쿠폰 사용 만료일시|
+|응답(json)|- status|쿠폰 상태(NORMAL:사용가능, USED:사용됨|
 
+### 쿠폰 사용 처리 API 
+### /coupon/couponPayment/{id}/{amount}
+|구분|파라미터|설명|
+|---|---|---|
+|요청|id|쿠폰id|
+|요청|amount|상품금액|
+|---|---|---|
+|HTTP응답코드|200|정상|
+|HTTP응답코드|400|비정상|
+|---|---|---|
+|응답(json)|resultMsg|응답메시지|
+|응답(json)|productAmount|상품금액|
+|응답(json)|discountAmount|실제 할인금액|
+|응답(json)|paymentAmount|결제 금액|
 
-
-### 쿠폰 사용 처리 API : /coupon/couponPayment/{id}/{amount}
-#### 요청 
-| id |  Coupon Id   |
-| amount |  Product Amount   |
-#### 응답 
-| resultMsg |  response messgae   |
+## Database Table Schema
+### COUPON : 쿠폰 목록
+|필드명|데이터타입|key|설명|
+|---|---|---|---|
+|id|int|PK|쿠폰ID|
+|use_min_amount|int|  |최소 사용 가능 상품 금액|
+|discountAmount|int|  |할인 금액|
+|usableFrom|date|  |쿠폰 사용 가능일시|
+|usableUntil|date|  |쿠폰 사용 만료일시|
+|status|varchar(10)|  |쿠폰 상태(NORMAL:사용가능, USED:사용됨|
 
 
 
 ## 문제해결
-
+쿠폰의 동시 사용 제한을 위해 JPA의 PESSIMISTIC_WRITE 모드를 사용
+- 동일 쿠폰 ID의 사용을 동시에 진행할 경우 모든 요청에 대하여 할인이 적용되는 것을 막기 위해 DB에서 해당 쿠폰 ROW에 LOCK을 걸고
+  읽기와 쓰기를 제한하여 다른 요청에서 할인이 되는 것을 방지한다. 
 
 
 ## 프로젝트 빌드 및 실행 방법
@@ -60,3 +89,7 @@
 - Eclipse Java EE IDE for Web Developers Photon ( STS Plugin 설치 )
 - Dependencies : spring-boot, JPA, H2, lombok ..
 
+### 빌드 및 실행 방법
+- Git Repositoires 에 https://github.com/kwonpc/CouponApi.git 등록 후 Import Projects 로 내려받기
+- 내려받은 프로젝트를 Maven 빌드
+- Run AS > Junit Test 진행하여 테스트 결과 확인
