@@ -37,5 +37,6 @@
 ## 프로젝트 빌드 및 실행 방법
 ### 개발 환경 
 - JAVA 1.8
-- Eclipse Java EE IDE for Web Developers Photon
+- Eclipse Java EE IDE for Web Developers Photon ( STS Plugin 설치 )
+- Dependencies : spring-boot, JPA, H2, lombok ..
 
