@@ -33,16 +33,24 @@
 ## API스펙
 ### 쿠폰 목록 조회 API 
 ### /coupon/availableCouponList/{amount}
+#### 요청 
+| amount |  상품 금액   |
+#### 응답 ( http 200 OK, http 400 Bad Request, mediaType = application/json)
+| resultMsg |  응답메시지   |
+| couponList |  쿠폰리스트   |
+| - id |  쿠폰id   |
+| - useMinAmount |  최소 사용 가능 상품 금액   |
+| - discountAmount |  쿠폰 할인 금액   |
+| - usableFrom |  쿠폰 사용 시작 일시   |
+| - usableUntil |  쿠폰 사용 만료 일시   |
 
 
-
-### 쿠폰 사용 처리 API
-### /coupon/couponPayment/{id}/{amount}
-|구분| param | descryption |
-|--------|-----|-----------|
-| REQUEST | id |  Coupon Id   |
-| REQUEST | amount |  Product Amount   |
-| RESPONSE | resultMsg |  response messgae   |
+### 쿠폰 사용 처리 API : /coupon/couponPayment/{id}/{amount}
+#### 요청 
+| id |  Coupon Id   |
+| amount |  Product Amount   |
+#### 응답 
+| resultMsg |  response messgae   |
 
 
 
