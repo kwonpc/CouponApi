@@ -38,6 +38,11 @@
 
 ### 쿠폰 사용 처리 API
 ### /coupon/couponPayment/{id}/{amount}
+|구분| param | descryption |
+|--------|-----|-----------|
+| REQUEST | id |  Coupon Id   |
+| REQUEST | amount |  Product Amount   |
+| RESPONSE | resultMsg |  response messgae   |
 
 
 
